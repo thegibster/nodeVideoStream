@@ -1,15 +1,12 @@
 'use strict';
 //Streaming video content to the browser
 const { createServer } = require('http');
-const {
-  stat,
-  createReadStream,
-  createWriteStream
- }  = require('fs');
+const { stat, createReadStream, createWriteStream }  = require('fs');
 const { promisify } = require('util');
 const file  = './video.mp4';
 const fileInfo = promisify(stat);
 const multiparty = require('multiparty');
+
 const respondWithVideo =  async (req, res) => {
   const { size } = await fileInfo(file);
   const range = req.headers.range;
